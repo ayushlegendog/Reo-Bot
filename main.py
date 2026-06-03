@@ -1,6 +1,10 @@
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 import asyncio
 import traceback
-
 import discord
 import discord.http
 import uvicorn
@@ -12,7 +16,6 @@ from reo.config.config import BotConfigClass
 BetConfig = BotConfigClass()
 bot = AutoShardedBot()
 
-# Seedhe module se app ko nikal liya, ab kabhi "not defined" nahi aayega
 from reo.surface.server import app
 
 async def main():
@@ -25,7 +28,6 @@ async def main():
         surface_server.bind_bot(bot)
         logger.separator()
 
-        # Fast Emoji Synchronization
         if BetConfig.SYNC_EMOJIS:
             run_sync()
         else:
@@ -50,9 +52,6 @@ async def main():
                 logger.error(f"You are rate limited. Retrying in {retry_after if retry_after else 'N/A'}s")
                 if retry_after == "N/A":
                     return
-                logger.error(f"Rate Limit details: {error.response.status}")
-                logger.error(f"Response headers: {error.response.headers}")
-                logger.error(f"Response text: {error.status} {error.text}")
                 await asyncio.sleep(int(retry_after))
 
         async def start_web():
@@ -94,4 +93,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-    
+            
