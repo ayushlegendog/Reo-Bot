@@ -12,7 +12,7 @@ from reo.config.config import BotConfigClass
 BotConfig = BotConfigClass()
 bot = AutoShardedBot()
 
-
+app = surface_server.app
 async def main():
     try:
         from reo.workflows.bootstrap import prepare_runtime
