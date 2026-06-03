@@ -5,19 +5,20 @@ import discord
 import discord.http
 import uvicorn
 
-from reo.engine.Bot import AutoShardedBot
+from reo.engine.bot import AutoShardedBot
 from reo.console.logging import logger
 from reo.config.config import BotConfigClass
 
-BotConfig = BotConfigClass()
+BetConfig = BotConfigClass()
 bot = AutoShardedBot()
 
-app = surface_server.app
+
 async def main():
     try:
         from reo.workflows.bootstrap import prepare_runtime
         from reo.surface import server as surface_server
         from reo.style.sync_emojis import run_sync
+        
 
         await prepare_runtime()
         surface_server.bind_bot(bot)
